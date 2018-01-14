@@ -22,7 +22,7 @@ namespace IntelligentApp.ViewModels
         public override async void OnInitialize()
         {
             await CrossMedia.Current.Initialize();
-            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported || CrossMedia.Current.IsPickPhotoSupported)
                 await this.Message.DisplayAlert(this.Title, ":( No camera available.", "Ok");
         }
 

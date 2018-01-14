@@ -18,7 +18,8 @@ namespace IntelligentApp.CognitiveServices
                 var attributes = new FaceAttributeType[] {
                     FaceAttributeType.Age,
                     FaceAttributeType.Gender,
-                    FaceAttributeType.Glasses
+                    FaceAttributeType.Glasses,
+                    FaceAttributeType.Smile,
                 };
                 var faceResult = await client.DetectAsync(stream, returnFaceAttributes: attributes);
                 if (faceResult != null && faceResult.Length > 0)
@@ -27,6 +28,7 @@ namespace IntelligentApp.CognitiveServices
                     {
                         result.Add(new Result("Gênero", face.FaceAttributes.Gender));
                         result.Add(new Result("Idade", face.FaceAttributes.Age.ToString()));
+                        result.Add(new Result("Sorrindo", face.FaceAttributes.Smile.ToString()));
                         result.Add(new Result("Óculos", face.FaceAttributes.Glasses.ToString()));
                     }
                 }

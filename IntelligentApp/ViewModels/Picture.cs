@@ -32,7 +32,7 @@ namespace IntelligentApp.ViewModels
         public Command AnalyzeCommand { get; set; }
         public Picture()
         {
-            this.Title = "Take or Pick a Photo";
+            this.Title = "Foto";
 
             this.TakePhotoCommand = new Command(async () => await this.TakePhoto());
             this.PickPhotoCommand = new Command(async () => await this.PickPhoto());
@@ -60,7 +60,7 @@ namespace IntelligentApp.ViewModels
             }
             catch
             {
-                await this.Message.DisplayAlert(this.Title, "Could not pick or take a photo...", "Ok");
+                await this.Message.DisplayAlert(this.Title, "Não foi possível obter a foto", "Ok");
                 this.IsBusy = false;
             }
         }

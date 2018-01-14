@@ -18,7 +18,7 @@ namespace IntelligentApp.ViewModels
 
         public AnalyzePhoto()
         {
-            this.Title = "Analyze";
+            this.Title = "Analisar";
 
             this.Results = new ObservableCollection<Result>();
         }
