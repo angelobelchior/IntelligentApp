@@ -1,27 +1,26 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
-using IntelligentApp.Models;
 using Microsoft.ProjectOxford.Face;
-using Plugin.Media.Abstractions;
 using FaceCollection = Microsoft.ProjectOxford.Face.Contract.Face;
 
 namespace IntelligentApp.CognitiveServices
 {
     public class Face : IService
     {
-        public async Task<List<Result>> Analyze(MediaFile photo)
+        public async Task<List<Result>> Analyze(Stream stream)
         {
             var client = new FaceServiceClient(Constants.FaceApiKey);
 
             var result = new List<Result>();
-            using (var photoStream = photo.GetStream())
+            using (stream)
             {
                 var attributes = new FaceAttributeType[] {
                     FaceAttributeType.Age,
                     FaceAttributeType.Gender,
                     FaceAttributeType.Glasses
                 };
-                var faceResult = await client.DetectAsync(photoStream, returnFaceAttributes: attributes);
+                var faceResult = await client.DetectAsync(stream, returnFaceAttributes: attributes);
                 if (faceResult != null && faceResult.Length > 0)
                 {
                     foreach (FaceCollection face in faceResult)

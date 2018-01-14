@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IntelligentApp.Views.PicturePage"
+             x:Class="IntelligentApp.Views.Picture"
              Title="{Binding Title}"
              IsBusy="{Binding IsBusy}"
              >
@@ -12,7 +12,7 @@
 
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Padding="10">
+            <StackLayout Padding="10" CompressedLayout.IsHeadless="True">
                 <Image Source="{Binding Image}" HorizontalOptions="FillAndExpand" Aspect="AspectFit" />
                 <Button IsVisible="{Binding CanAnalyze}" Text="Analyze" Command="{Binding AnalyzeCommand}" />
             </StackLayout>

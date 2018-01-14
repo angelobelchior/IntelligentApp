@@ -5,13 +5,13 @@ using Xamarin.Forms;
 
 namespace IntelligentApp.ViewModels
 {
-    public class HomeViewModel : ViewModelBase
+    public class Home : ViewModel
     {
         public ICommand CognitiveServiceSelectedCommand { get; set; }
 
         public IReadOnlyCollection<Models.CognitiveService> CognitiveServices { get; set; }
 
-        public HomeViewModel() : base("Cognitive Services")
+        public Home()
         {
             this.CognitiveServices = Models.CognitiveService.ListAll();
             this.CognitiveServiceSelectedCommand = new Command(this.CognitiveServiceSelected);
@@ -27,7 +27,7 @@ namespace IntelligentApp.ViewModels
         private async void CognitiveServiceSelected(object parameter)
         {
             if (parameter is Models.CognitiveService cognitiveService)
-                await this.Navigation.Push(new Views.PicturePage(cognitiveService));
+                await this.Navigation.To<Picture>("CognitiveService", cognitiveService);
         }
     }
 }

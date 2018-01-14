@@ -2,6 +2,7 @@
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using System;
 
 namespace IntelligentApp
 {
@@ -10,8 +11,13 @@ namespace IntelligentApp
         public App()
         {
             InitializeComponent();
+            
+            Locator.Register<ViewModels.Home, Views.Home>();
+            Locator.Register<ViewModels.AnalyzePhoto, Views.AnalyzePhoto>();
+            Locator.Register<ViewModels.Picture, Views.Picture>();
+            var home = Locator.GetView<ViewModels.Home>();
 
-            var navigationPage = new NavigationPage(new Views.HomePage());
+            var navigationPage = new NavigationPage(home);
             navigationPage.BarBackgroundColor = Color.FromHex("#2196F3");
             navigationPage.BarTextColor = Color.White;
 

@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 
-namespace IntelligentApp
+namespace IntelligentApp.ViewModels.Services
 {
-    public interface IMessageService
+    public interface IMessage
     {
         Task<string> DisplayActionSheet(string title, string cancel, string destruction, params string[] buttons);
         Task DisplayAlert(string title, string message, string cancel);

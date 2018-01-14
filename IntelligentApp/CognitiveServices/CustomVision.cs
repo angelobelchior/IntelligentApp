@@ -3,15 +3,14 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using IntelligentApp.Models;
 using Newtonsoft.Json;
-using Plugin.Media.Abstractions;
+using System.IO;
 
 namespace IntelligentApp.CognitiveServices
 {
     public class CustomVision : IService
     {
-        public async Task<List<Result>> Analyze(MediaFile photo)
+        public async Task<List<Result>> Analyze(Stream stream)
         {
             using (var client = new HttpClient())
             {
@@ -19,7 +18,7 @@ namespace IntelligentApp.CognitiveServices
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Prediction-Key", Constants.CustomVisionsApiKey);
 
                 var content = new MultipartFormDataContent();
-                content.Add(new StreamContent(photo.GetStream()), "arquivo", "arquivo.jpg");
+                content.Add(new StreamContent(stream), "arquivo", "arquivo.jpg");
 
                 var response = await client.PostAsync(Constants.CustomVisionsApiEndpoint, content);
                 if (!response.IsSuccessStatusCode)
@@ -55,7 +54,7 @@ namespace IntelligentApp.CognitiveServices
             public float Probability { get; set; }
 
             public Result Convert()
-                => new Result(this.Tag, this.Probability.ToString());
+                => new Result(this.Tag, this.Probability);
         }
     }
 }

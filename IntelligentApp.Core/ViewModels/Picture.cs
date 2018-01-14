@@ -1,15 +1,14 @@
 ﻿using Plugin.Media;
 using Plugin.Media.Abstractions;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace IntelligentApp.ViewModels
 {
-    public class PictureViewModel : ViewModelBase
+    public class Picture : ViewModel
     {
-        private readonly CognitiveServices.IService _service;
-
         private MediaFile _mediaFile;
 
         private string _image;
@@ -29,11 +28,8 @@ namespace IntelligentApp.ViewModels
         public Command TakePhotoCommand { get; set; }
         public Command PickPhotoCommand { get; set; }
         public Command AnalyzeCommand { get; set; }
-        public PictureViewModel(Models.CognitiveService cognitiveService)
-            : base(cognitiveService.Name)
+        public Picture()
         {
-            this._service = Activator.CreateInstance(cognitiveService.Type) as CognitiveServices.IService;
-
             this.TakePhotoCommand = new Command(async () => await this.TakePhoto());
             this.PickPhotoCommand = new Command(async () => await this.PickPhoto());
             this.AnalyzeCommand = new Command(async () => await this.Analyze());
@@ -58,15 +54,14 @@ namespace IntelligentApp.ViewModels
                 this.Image = this._mediaFile.Path;
                 this.CanAnalyze = true;
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(ex.ToString());
                 await this.Message.DisplayAlert(this.Title, "Could not pick or take a photo...", "Ok");
                 this.IsBusy = false;
             }
         }
 
         private async Task Analyze()
-            => await this.Navigation.Push(new Views.AnalyzePhoto(this._service, this._mediaFile));
+            => await this.Navigation.To<AnalyzePhoto>(this.Parameters);
     }
 }

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IntelligentApp.Views.AnalyzePhoto"
+             Padding="10"
+             Title="{Binding Title}"
+             IsBusy="{Binding IsBusy}"
+             >
+    <ContentPage.Content>
+        <ScrollView CompressedLayout.IsHeadless="True">
+            <StackLayout CompressedLayout.IsHeadless="True">
+                <Label Text="No Result to show..." 
+                       IsVisible="{Binding HasItems}" 
+                       VerticalOptions="CenterAndExpand" 
+                       HorizontalOptions="CenterAndExpand" />
+
+                <ListView ItemsSource="{Binding Results}" IsRefreshing="{Binding IsBusy}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Text}" Detail="{Binding Detail}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

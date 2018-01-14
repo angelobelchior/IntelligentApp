@@ -1,26 +1,25 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using IntelligentApp.Models;
 using Microsoft.ProjectOxford.Vision;
-using Plugin.Media.Abstractions;
 using System.Linq;
+using System.IO;
 
 namespace IntelligentApp.CognitiveServices
 {
     public class Vision : IService
     {
-        public async Task<List<Result>> Analyze(MediaFile photo)
+        public async Task<List<Result>> Analyze(Stream stream)
         {
             var client = new VisionServiceClient(Constants.VisionApiKey);
 
             var result = new List<Result>();
-            using (var photoStream = photo.GetStream())
+            using (stream)
             {
                 VisualFeature[] features = { VisualFeature.Tags };
-                var visionsResult = await client.AnalyzeImageAsync(photoStream, features.ToList(), null);
+                var visionsResult = await client.AnalyzeImageAsync(stream, features.ToList(), null);
                 if (visionsResult != null && visionsResult?.Tags.Length > 0)
                     foreach (var tag in visionsResult.Tags)
-                        result.Add(new Result(tag.Name, tag.Confidence.ToString()));
+                        result.Add(new Result(tag.Name, tag.Confidence));
             }
             return result;
         }

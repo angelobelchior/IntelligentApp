@@ -1,13 +1,11 @@
-﻿using Plugin.Media.Abstractions;
+﻿using IntelligentApp.CognitiveServices;
+using Plugin.Media.Abstractions;
 using System.Collections.ObjectModel;
 
 namespace IntelligentApp.ViewModels
 {
-    public class AnalyzePhotoViewModel : ViewModelBase
+    public class AnalyzePhoto : ViewModel
     {
-        private readonly CognitiveServices.IService _service;
-        private readonly MediaFile _mediaFile;
-
         private bool _hasItems = false;
         public bool HasItems
         {
@@ -15,27 +13,26 @@ namespace IntelligentApp.ViewModels
             set => this.SetValue(value, ref _hasItems);
         }
 
-        public ObservableCollection<Models.Result> Results { get; set; }
+        public ObservableCollection<Result> Results { get; set; }
 
-        public AnalyzePhotoViewModel(CognitiveServices.IService service, MediaFile mediaFile)
-            : base("Análise da Imagem")
+        public AnalyzePhoto()
         {
-            this._service = service;
-            this._mediaFile = mediaFile;
-
-            this.Results = new ObservableCollection<Models.Result>();
+            this.Results = new ObservableCollection<Result>();
         }
 
         public override async void OnInitialize()
         {
             try
             {
+                var service = this.Parameters["CognitiveServices"] as IService;
+                var mediaFile = this.Parameters["MediaFile"] as MediaFile;
+
                 this.IsBusy = true;
-                if (this._mediaFile != null)
+                if (mediaFile != null)
                 {
-                    var results = await this._service.Analyze(this._mediaFile);
+                    var results = await service.Analyze(mediaFile.GetStream());
                     this.Results.Clear();
-                    if(results != null)
+                    if (results != null)
                         foreach (var result in results)
                             this.Results.Add(result);
 

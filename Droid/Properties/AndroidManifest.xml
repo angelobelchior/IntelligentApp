@@ -1,13 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.angelobelchior.IntelligentApp">
-	<uses-sdk android:minSdkVersion="15" />
-	<application android:label="IntelligentApp">
-        <provider android:name="android.support.v4.content.FileProvider" 
-                  android:authorities="com.angelobelchior.IntelligentApp.fileprovider" 
-                  android:exported="false" 
-                  android:grantUriPermissions="true">
-            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" 
-                       android:resource="@xml/file_paths"></meta-data>
-        </provider>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.angelobelchior.IntelligentApp" android:installLocation="auto">
+	<uses-sdk android:minSdkVersion="19" />
+	<application android:label="IntelligentApp" android:icon="@drawable/icon">
+		<provider android:name="android.support.v4.content.FileProvider" android:authorities="com.angelobelchior.IntelligentApp.fileprovider" android:exported="false" android:grantUriPermissions="true">
+			<meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths"></meta-data>
+		</provider>
 	</application>
 </manifest>

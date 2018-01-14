@@ -1,22 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using IntelligentApp.Models;
 using Microsoft.ProjectOxford.Vision;
-using Plugin.Media.Abstractions;
 using System.Linq;
+using System.IO;
 
 namespace IntelligentApp.CognitiveServices
 {
     public class OCR : IService
     {
-        public async Task<List<Result>> Analyze(MediaFile photo)
+        public async Task<List<Result>> Analyze(Stream stream)
         {
             var client = new VisionServiceClient(Constants.VisionApiKey);
 
             var result = new List<Result>();
-            using (var photoStream = photo.GetStream())
+            using (stream)
             {
-                var ocrResult = await client.RecognizeTextAsync(photoStream);
+                var ocrResult = await client.RecognizeTextAsync(stream);
                 foreach (var region in ocrResult.Regions)
                 {
                     var lines = region.Lines.Select(l => string.Join(" ", l.Words.Select(w => w.Text)));

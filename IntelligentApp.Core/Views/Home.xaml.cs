@@ -2,10 +2,10 @@
 
 namespace IntelligentApp.Views
 {
-    public partial class HomePage : ContentPage
+    public partial class Home : ContentPage
     {
-        ViewModels.HomeViewModel _viewModel = new ViewModels.HomeViewModel();
-        public HomePage()
+        ViewModels.Home _viewModel = new ViewModels.Home();
+        public Home()
         {
             InitializeComponent();
 
