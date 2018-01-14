@@ -26,8 +26,8 @@ namespace IntelligentApp
 
         protected override void OnStart()
         {
-            AppCenter.Start("ios=7966ff68-0c94-423b-8aad-9326c89df212;" +
-                            "android=96241571-bdbb-4836-b104-6efb9340869f",
+            AppCenter.Start("ios= <<Chave IOS>>;" +
+                            "android= <<Chave Android>>",
                             typeof(Analytics), typeof(Crashes));
         }
 
