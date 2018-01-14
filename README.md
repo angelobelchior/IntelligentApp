@@ -117,6 +117,29 @@ Você também pode optar por uma camada paga. O custo varia, mas no geral, é be
 
 ---
 
+## Telemetria do APP
+
+Para telemetria do App, utilizo o Serviço [App Center](https://appcenter.ms) da Microsoft.
+
+É um serviço muito legal e várias funcionalidades são gratuitas. Veja: [https://azure.microsoft.com/pt-br/pricing/details/app-center/](https://azure.microsoft.com/pt-br/pricing/details/app-center/)
+
+Na classe [App.xaml.cs](https://github.com/angelobelchior/IntelligentApp/blob/master/IntelligentApp/App.xaml.cs) temos o método 
+
+```csharp
+        protected override void OnStart()
+        {
+            AppCenter.Start("ios=;" +
+                            "android=",
+                            typeof(Analytics), typeof(Crashes));
+        }
+```
+
+Caso você queira usar o App Center, será necessário criar uma conta e registrar os App. 
+
+Após o registro, informe as chaves do iOS e do Android.
+
+---
+
 ## Contribua
 
 Esse é um projeto Open Source com [licença MIT](https://github.com/angelobelchior/IntelligentApp/blob/master/LICENSE)
