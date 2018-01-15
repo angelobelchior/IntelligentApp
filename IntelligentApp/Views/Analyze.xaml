@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IntelligentApp.Views.AnalyzePhoto"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true"             
+             x:Class="IntelligentApp.Views.Analyze"
              Padding="10"
              Title="{Binding Title}"
              IsBusy="{Binding IsBusy}"
@@ -9,7 +11,7 @@
     <ContentPage.Content>
         <ScrollView CompressedLayout.IsHeadless="True">
             <StackLayout CompressedLayout.IsHeadless="True">
-                <Label Text="No Result to show..." 
+                <Label Text="Sem resultados para mostrar" 
                        IsVisible="{Binding HasItems}" 
                        VerticalOptions="CenterAndExpand" 
                        HorizontalOptions="CenterAndExpand" />

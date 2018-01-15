@@ -22,14 +22,14 @@ namespace IntelligentApp.ViewModels
         public override async void OnInitialize()
         {
             await CrossMedia.Current.Initialize();
-            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported || CrossMedia.Current.IsPickPhotoSupported)
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
                 await this.Message.DisplayAlert(this.Title, ":( No camera available.", "Ok");
         }
 
         private async void CognitiveServiceSelected(object parameter)
         {
             if (parameter is Models.CognitiveService cognitiveService)
-                await this.Navigation.To<Picture>(Parameter.Create("CognitiveService", cognitiveService));
+                await this.Navigation.To<Photo>(new Parameters("CognitiveService", cognitiveService));
         }
     }
 }

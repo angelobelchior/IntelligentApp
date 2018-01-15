@@ -3,13 +3,12 @@ using IntelligentApp.Models;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace IntelligentApp.ViewModels
 {
-    public class Picture : ViewModel
+    public class Photo : ViewModel
     {
         private MediaFile _mediaFile;
 
@@ -30,13 +29,22 @@ namespace IntelligentApp.ViewModels
         public Command TakePhotoCommand { get; set; }
         public Command PickPhotoCommand { get; set; }
         public Command AnalyzeCommand { get; set; }
-        public Picture()
-        {
-            this.Title = "Foto";
 
+        private IService _service;
+        private CognitiveService _cognitiveService;
+
+        public Photo()
+        {
             this.TakePhotoCommand = new Command(async () => await this.TakePhoto());
             this.PickPhotoCommand = new Command(async () => await this.PickPhoto());
             this.AnalyzeCommand = new Command(async () => await this.Analyze());
+        }
+
+        public override void OnInitialize()
+        {
+            this._cognitiveService = this.Parameters["CognitiveService"] as CognitiveService;
+            this._service = Activator.CreateInstance(this._cognitiveService.Type) as IService;
+            this.Title = this._cognitiveService.Name;
         }
 
         private async Task TakePhoto()
@@ -67,13 +75,13 @@ namespace IntelligentApp.ViewModels
 
         private async Task Analyze()
         {
-            var cognitiveService = this.Parameters["CognitiveService"] as CognitiveService;
-            var iservice = Activator.CreateInstance(cognitiveService.Type) as IService;
-
-            var media = new Parameter("Media", this._mediaFile);
-            var service = new Parameter("Service", iservice);
-
-            await this.Navigation.To<AnalyzePhoto>(Parameter.Create(media, service));
+            var args = new object[]
+            {
+                "Media", this._mediaFile,
+                "Service", this._service,
+                "ServiceName", this._cognitiveService.Name
+            };
+            await this.Navigation.To<Analyze>(new Parameters(args));
         }
     }
 }

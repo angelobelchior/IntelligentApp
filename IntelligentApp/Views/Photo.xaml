@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:IntelligentApp.Views.Converters"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true"
+             x:Class="IntelligentApp.Views.Photo"
+             Title="{Binding Title}"
+             IsBusy="{Binding IsBusy}"
+             >
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:InverseBoolConverter x:Key="inverseBoolConverter"/>
+        </ResourceDictionary>        
+    </ContentPage.Resources>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding TakePhotoCommand}" Text="Take Photo" Icon="take_photo.png"/>
+        <ToolbarItem Command="{Binding PickPhotoCommand}" Text="Pick Photo" Icon="pick_photo.png" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="10" CompressedLayout.IsHeadless="True">
+                <Label Text="Tire ou Selecione uma Foto"
+                       VerticalOptions="CenterAndExpand" 
+                       HorizontalOptions="CenterAndExpand" 
+                       IsVisible="{Binding CanAnalyze, Converter={StaticResource inverseBoolConverter}}"
+                       TextColor="#726e6e"
+                       FontSize="Medium"
+                       />
+
+                <Image Source="{Binding Image}" HorizontalOptions="FillAndExpand" Aspect="AspectFit" />
+                <Button IsVisible="{Binding CanAnalyze}" Text="Analisar" Command="{Binding AnalyzeCommand}" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

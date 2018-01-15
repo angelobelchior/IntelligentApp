@@ -12,7 +12,7 @@ namespace IntelligentApp
         public static void Register<TViewModel, TView>() where TViewModel : ViewModel
             => VIEWS.Add(typeof(TViewModel), typeof(TView));
 
-        public static Page GetView<TViewModel>(IList<ViewModel.Parameter> parameters = null)
+        public static Page GetView<TViewModel>(Parameters parameters = null)
         {
             var type = typeof(TViewModel);
             if (!VIEWS.TryGetValue(type, out var viewType))

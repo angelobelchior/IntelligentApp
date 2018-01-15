@@ -1,11 +1,10 @@
 ﻿using IntelligentApp.CognitiveServices;
 using Plugin.Media.Abstractions;
-using System;
 using System.Collections.ObjectModel;
 
 namespace IntelligentApp.ViewModels
 {
-    public class AnalyzePhoto : ViewModel
+    public class Analyze : ViewModel
     {
         private bool _hasItems = false;
         public bool HasItems
@@ -16,10 +15,8 @@ namespace IntelligentApp.ViewModels
 
         public ObservableCollection<Result> Results { get; set; }
 
-        public AnalyzePhoto()
+        public Analyze()
         {
-            this.Title = "Analisar";
-
             this.Results = new ObservableCollection<Result>();
         }
 
@@ -27,6 +24,8 @@ namespace IntelligentApp.ViewModels
         {
             try
             {
+                this.Title = this.Parameters["ServiceName"].ToString();
+
                 var service = this.Parameters["Service"] as IService;
                 var mediaFile = this.Parameters["Media"] as MediaFile;
 
@@ -40,7 +39,7 @@ namespace IntelligentApp.ViewModels
 
                 this.HasItems = this.Results.Count == 0;
             }
-            catch(Exception ex)
+            catch
             {
                 await this.Message.DisplayAlert(this.Title, "Erro ao processar a imagem", "Ok");
             }

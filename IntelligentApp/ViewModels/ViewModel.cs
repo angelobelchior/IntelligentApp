@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
-using System.Linq;
+using System;
 
 namespace IntelligentApp.ViewModels
 {
@@ -27,7 +27,7 @@ namespace IntelligentApp.ViewModels
         protected Services.INavigation Navigation { get; private set; }
         protected Services.IMessage Message { get; private set; }
 
-        protected Dictionary<string, object> Parameters { get; }
+        protected IDictionary<string, object> Parameters { get; private set; }
 
         public ViewModel()
         {
@@ -40,47 +40,35 @@ namespace IntelligentApp.ViewModels
 
         public virtual void OnFinalize() { }
 
-        public void AddParameter(string name, object value)
-            => this.Parameters.Add(name, value);
-
-        public void AddParameter(Parameter parameter)
-            => this.Parameters.Add(parameter.Name, parameter.Value);
-
-        public void AddParameters(IList<Parameter> parameters)
-        {
-            foreach (var parameter in parameters)
-                this.AddParameter(parameter);
-        }
+        public void AddParameters(IDictionary<string, object> parameters = null)
+            => this.Parameters = parameters;
 
         protected void SetValue<T>(T value, ref T field, [CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             field = value;
         }
+    }
 
-        public class Parameter
+    public class Parameters : Dictionary<string, object>
+    {
+        public Parameters(string key, object value)
         {
-            public string Name { get; }
-            public object Value { get; }
+            this.Add(key, value);
+        }
 
-            public Parameter(string name, object value)
+        public Parameters(params object[] args)
+        {
+            if (args.Length < 2) throw new ArgumentException();
+            if (args.Length % 2 != 0) throw new ArgumentException();
+            for (int i = 0; i < args.Length; i++)
             {
-                this.Name = name;
-                this.Value = value;
+                if(i % 2 == 0)
+                {
+                    this.Add(args[i].ToString(), args[i + 1]);
+                    i++;
+                }
             }
-
-            public static IList<Parameter> Create(Parameter parameter)
-                => new List<Parameter> { parameter };
-
-            public static IList<Parameter> Create(string name, object value)
-                => Create(new Parameter(name, value));
-
-            public static IList<Parameter> Create(Dictionary<string, object> parameters)
-                => parameters.Select(p => new Parameter(p.Key, p.Value))
-                             .ToList();
-
-            public static IList<Parameter> Create(params Parameter[] parameters)
-                => new List<Parameter>(parameters);
         }
     }
 }

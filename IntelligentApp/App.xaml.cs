@@ -13,8 +13,8 @@ namespace IntelligentApp
             InitializeComponent();
             
             Locator.Register<ViewModels.Home, Views.Home>();
-            Locator.Register<ViewModels.AnalyzePhoto, Views.AnalyzePhoto>();
-            Locator.Register<ViewModels.Picture, Views.Picture>();
+            Locator.Register<ViewModels.Analyze, Views.Analyze>();
+            Locator.Register<ViewModels.Photo, Views.Photo>();
             var home = Locator.GetView<ViewModels.Home>();
 
             var navigationPage = new NavigationPage(home);

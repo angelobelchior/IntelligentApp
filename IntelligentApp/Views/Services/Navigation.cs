@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using IntelligentApp.ViewModels;
 using Xamarin.Forms;
-using System.Linq;
 using System.Collections.Generic;
 
 [assembly: Dependency(typeof(IntelligentApp.Views.Services.Navigation))]
@@ -9,7 +8,7 @@ namespace IntelligentApp.Views.Services
 {
     public class Navigation : ViewModels.Services.INavigation
     {
-        public async Task To<TViewModel>(IList<ViewModel.Parameter> parameters = null, bool modal = false)
+        public async Task To<TViewModel>(Parameters parameters = null, bool modal = false)
             where TViewModel : ViewModel
         {
             var page = Locator.GetView<TViewModel>(parameters);

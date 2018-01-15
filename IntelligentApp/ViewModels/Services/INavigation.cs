@@ -7,6 +7,7 @@ namespace IntelligentApp.ViewModels.Services
     {
         Task GoBack(bool modal = false);
 
-        Task To<TViewModel>(IList<ViewModel.Parameter> parameters = null, bool modal = false) where TViewModel : ViewModel;
+        Task To<TViewModel>(Parameters parameters = null, bool modal = false)
+            where TViewModel : ViewModel;
     }
 }

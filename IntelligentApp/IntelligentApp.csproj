@@ -49,21 +49,23 @@
     <Compile Include="CognitiveServices\Vision.cs" />
     <Compile Include="Locator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\AnalyzePhoto.cs" />
-    <Compile Include="ViewModels\Picture.cs" />
+    <Compile Include="ViewModels\Analyze.cs" />
+    <Compile Include="ViewModels\Photo.cs" />
     <Compile Include="ViewModels\Services\IMessage.cs" />
     <Compile Include="ViewModels\Services\INavigation.cs" />
-    <Compile Include="Views\AnalyzePhoto.xaml.cs">
-      <DependentUpon>AnalyzePhoto.xaml</DependentUpon>
+    <Compile Include="Views\Analyze.xaml.cs">
+      <DependentUpon>Analyze.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Converters\InverseBoolConverter.cs" />
+    <Compile Include="Views\Support\Extentions.cs" />
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Home.cs" />
     <Compile Include="Models\CognitiveService.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
-    <Compile Include="Views\Picture.xaml.cs">
-      <DependentUpon>Picture.xaml</DependentUpon>
+    <Compile Include="Views\Photo.xaml.cs">
+      <DependentUpon>Photo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Services\Message.cs" />
     <Compile Include="Views\Services\Navigation.cs" />
@@ -117,13 +119,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Picture.xaml">
+    <EmbeddedResource Include="Views\Photo.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\AnalyzePhoto.xaml">
+    <EmbeddedResource Include="Views\Analyze.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

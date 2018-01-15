@@ -2,16 +2,17 @@
 
 namespace IntelligentApp.Views
 {
-    public partial class AnalyzePhoto : ContentPage
+    public partial class Photo : ContentPage
     {
-        public AnalyzePhoto()
+        public Photo()
         {
             InitializeComponent();
+            Extentions.LargeTitle(this);
         }
 
         protected override void OnAppearing()
         {
-            if(this.BindingContext is ViewModels.ViewModel viewModel)
+            if (this.BindingContext is ViewModels.ViewModel viewModel)
                 viewModel.OnInitialize();
         }
     }

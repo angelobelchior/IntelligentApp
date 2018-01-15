@@ -23,7 +23,7 @@ namespace IntelligentApp.Models
             cognitiveServices.Add(new CognitiveService
             {
                 Name = "Emotion API",
-                Icon = "emotion.png",
+                Icon = "emoticon.png",
                 Detail = "Personalize a experiência do usuário com o reconhecimento de Emoções",
                 Type = typeof(CognitiveServices.Emotion)
             });
@@ -37,14 +37,14 @@ namespace IntelligentApp.Models
             cognitiveServices.Add(new CognitiveService
             {
                 Name = "OCR",
-                Icon = "visions.png",
+                Icon = "ocr.png",
                 Detail = "Extraia textos de imagens",
                 Type = typeof(CognitiveServices.OCR)
             });
             cognitiveServices.Add(new CognitiveService
             {
                 Name = "Custom Vision",
-                Icon = "visions.png",
+                Icon = "custom_visions.png",
                 Detail = "Inteligência Visual de uma forma fácil",
                 Type = typeof(CognitiveServices.CustomVision)
             });
