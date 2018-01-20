@@ -1,6 +1,8 @@
-﻿using Xamarin.Forms;
+﻿using IntelligentApp.iOS.Renderers;
+using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
+[assembly: ExportRenderer(typeof(ViewCell), typeof(StandardViewCellRenderer))]
 namespace IntelligentApp.iOS.Renderers
 {
     public class StandardViewCellRenderer : ImageCellRenderer

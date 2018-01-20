@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
-             ios:Page.UseSafeArea="true"
              x:Class="IntelligentApp.Views.Home"
              Title="{Binding Title}"
              BackgroundColor="#FFFFFF"
              Padding="10"
              >
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding AboutCommand}" Text="Sobre">
+            <ToolbarItem.Order>
+                <OnPlatform x:TypeArguments="ToolbarItemOrder">
+                    <OnPlatform.Platforms>
+                        <On Platform="iOS" Value="Default" />
+                        <On Platform="Android" Value="Secondary" />
+                    </OnPlatform.Platforms>
+                </OnPlatform>
+            </ToolbarItem.Order>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
     <StackLayout CompressedLayout.IsHeadless="true">
         <ListView x:Name="cognitiveServicesList"
                   ItemsSource="{Binding CognitiveServices}"
                   BackgroundColor="#FFFFFF"
-                  HasUnevenRows="true">
+                  HasUnevenRows="true"
+                  SeparatorVisibility="None"
+                  >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ImageCell ImageSource="{Binding Icon}"

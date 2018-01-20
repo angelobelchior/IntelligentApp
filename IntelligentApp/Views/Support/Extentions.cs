@@ -4,10 +4,12 @@ namespace Xamarin.Forms
 {
     public static class Extentions
     {
-        public static void LargeTitle(Page page)
+        public static void IPhoneX(Page page)
         {
-            page.On<PlatformConfiguration.iOS>()
-                .SetLargeTitleDisplay(LargeTitleDisplayMode.Always);
+            var ios = page.On<PlatformConfiguration.iOS>();
+
+            //ios.SetLargeTitleDisplay(LargeTitleDisplayMode.Automatic);
+            //ios.SafeAreaInsets();
         }
     }
 }

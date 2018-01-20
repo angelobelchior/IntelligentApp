@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Linq;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
+using IntelligentApp.Models;
 
 namespace IntelligentApp.CognitiveServices
 {
-    public class CustomVision : IService
+    public class CustomVision : IVisionService
     {
-        public async Task<List<Result>> Analyze(Stream stream)
+        public async Task<VisionResult> Analyze(Stream stream)
         {
             using (var client = new HttpClient())
             {
@@ -29,7 +28,8 @@ namespace IntelligentApp.CognitiveServices
                 if (customVisionResponse == null)
                     return null;
 
-                return customVisionResponse.Convert();
+                //return customVisionResponse.Convert();
+                return null;
             }
         }
 
@@ -41,10 +41,10 @@ namespace IntelligentApp.CognitiveServices
             public DateTime Created { get; set; }
             public Prediction[] Predictions { get; set; }
 
-            public List<Result> Convert() => this.Predictions
-                                                 ?.OrderByDescending(p => p.Probability)
-                                                 ?.Select(p => p.Convert())
-                                                 ?.ToList();
+            //public List<VisionResult> Convert() => this.Predictions
+            //                                     ?.OrderByDescending(p => p.Probability)
+            //                                     ?.Select(p => p.Convert())
+            //                                     ?.ToList();
         }
 
         public class Prediction
@@ -53,8 +53,8 @@ namespace IntelligentApp.CognitiveServices
             public string Tag { get; set; }
             public float Probability { get; set; }
 
-            public Result Convert()
-                => new Result(this.Tag, this.Probability);
+            //public VisionResult Convert()
+            //    => new VisionResult(this.Tag, this.Probability);
         }
     }
 }

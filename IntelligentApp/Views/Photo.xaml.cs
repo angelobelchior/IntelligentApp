@@ -7,7 +7,7 @@ namespace IntelligentApp.Views
         public Photo()
         {
             InitializeComponent();
-            Extentions.LargeTitle(this);
+            Extentions.IPhoneX(this);
         }
 
         protected override void OnAppearing()

@@ -1,27 +1,35 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.ProjectOxford.Vision;
-using System.Linq;
+using Microsoft.ProjectOxford;
 using System.IO;
+using IntelligentApp.Models;
 
 namespace IntelligentApp.CognitiveServices
 {
-    public class Vision : IService
+    public class Vision : IVisionService
     {
-        public async Task<List<Result>> Analyze(Stream stream)
+        public async Task<VisionResult> Analyze(Stream stream)
         {
-            var client = new VisionServiceClient(Constants.VisionApiKey);
+            var client = new VisionServiceClient(Constants.VisionApiKey, Constants.CustomVisionsApiEndpoint);
 
-            var result = new List<Result>();
+            var attributes = new List<VisionAttribute>();
+            var rectangles = new List<Rectangle>();
             using (stream)
             {
-                VisualFeature[] features = { VisualFeature.Tags };
-                var visionsResult = await client.AnalyzeImageAsync(stream, features.ToList(), null);
+                var features = new VisualFeature[] { VisualFeature.Tags, VisualFeature.Faces };
+                var visionsResult = await client.AnalyzeImageAsync(stream, features, null);
                 if (visionsResult != null && visionsResult?.Tags.Length > 0)
+                {
+                    if (visionsResult.Faces != null)
+                        foreach (var face in visionsResult.Faces)
+                            rectangles.Add(face.FaceRectangle.ToRectangle());
+
                     foreach (var tag in visionsResult.Tags)
-                        result.Add(new Result(tag.Name, tag.Confidence));
+                        attributes.Add(new VisionAttribute(tag.Name, tag.Hint, tag.Confidence));
+                }
             }
-            return result;
+            return new VisionResult { Attributes = attributes, Rectangles = rectangles };
         }
     }
 }

@@ -2,37 +2,81 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:IntelligentApp.Views.Converters"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
-             ios:Page.UseSafeArea="true"
              x:Class="IntelligentApp.Views.Photo"
              Title="{Binding Title}"
              IsBusy="{Binding IsBusy}"
+             BackgroundColor="#FFFFFF"
              >
-    
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:InverseBoolConverter x:Key="inverseBoolConverter"/>
-        </ResourceDictionary>        
+        </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding TakePhotoCommand}" Text="Take Photo" Icon="take_photo.png"/>
-        <ToolbarItem Command="{Binding PickPhotoCommand}" Text="Pick Photo" Icon="pick_photo.png" />
+        <ToolbarItem Command="{Binding TakePhotoCommand}" Text="Take Photo" Priority="0" Icon="take_photo.png"/>
+        <ToolbarItem Command="{Binding PickPhotoCommand}" Text="Pick Photo" Priority="1" Icon="pick_photo.png" />
+        <ToolbarItem Command="{Binding AboutServiceCommand}" Text="" Priority="2">
+            <ToolbarItem.Text>
+                <OnPlatform x:TypeArguments="x:String">
+                    <OnPlatform.Platforms>
+                        <On Platform="iOS" Value="Sobre" />
+                        <On Platform="Android" Value="Sobre o Serviço" />
+                    </OnPlatform.Platforms>
+                </OnPlatform>
+            </ToolbarItem.Text>
+
+            <ToolbarItem.Order>
+                <OnPlatform x:TypeArguments="ToolbarItemOrder">
+                    <OnPlatform.Platforms>
+                        <On Platform="iOS" Value="Default" />
+                        <On Platform="Android" Value="Secondary" />
+                    </OnPlatform.Platforms>
+                </OnPlatform>                
+            </ToolbarItem.Order>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Padding="10" CompressedLayout.IsHeadless="True">
+            <StackLayout CompressedLayout.IsHeadless="True">
                 <Label Text="Tire ou Selecione uma Foto"
                        VerticalOptions="CenterAndExpand" 
                        HorizontalOptions="CenterAndExpand" 
-                       IsVisible="{Binding CanAnalyze, Converter={StaticResource inverseBoolConverter}}"
                        TextColor="#726e6e"
-                       FontSize="Medium"
+                       FontSize="Small"
+                       FontAttributes="Bold"
+                       Margin="50"
+                       IsVisible="{Binding IsVisible}"
                        />
 
-                <Image Source="{Binding Image}" HorizontalOptions="FillAndExpand" Aspect="AspectFit" />
-                <Button IsVisible="{Binding CanAnalyze}" Text="Analisar" Command="{Binding AnalyzeCommand}" />
+                <Image Source="{Binding Image}" 
+                       VerticalOptions="CenterAndExpand" 
+                       HorizontalOptions="CenterAndExpand" 
+                       Aspect="Fill"
+                       Margin="10"
+                       />
+
+                <Label Text="Sem resultados para mostrar" 
+                       IsVisible="{Binding NoItems}"
+                       VerticalOptions="CenterAndExpand" 
+                       HorizontalOptions="CenterAndExpand" 
+                       />
+
+                <ListView ItemsSource="{Binding Results}" 
+                          IsRefreshing="{Binding IsBusy}" 		          
+                          IsGroupingEnabled="true" 
+		                  GroupDisplayBinding="{Binding Key}"
+                          SeparatorVisibility="None"
+                          >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Text}" Detail="{Binding Detail}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

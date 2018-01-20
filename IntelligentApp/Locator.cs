@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
+using static IntelligentApp.ViewModels.ViewModel;
 
 namespace IntelligentApp
 {
@@ -16,20 +17,20 @@ namespace IntelligentApp
         {
             var type = typeof(TViewModel);
             if (!VIEWS.TryGetValue(type, out var viewType))
-                throw new InvalidOperationException($"Cannot get view type for {type.Name}");
+                throw new InvalidOperationException($"Cannot get view type to {type.Name}");
 
             var view = Activator.CreateInstance(viewType) as Page;
             if (view == null)
                 throw new InvalidOperationException($"Cannot create a view instance");
 
-            var viewModel = Activator.CreateInstance(type) as ViewModel;
-            if (viewModel == null)
-                throw new InvalidOperationException($"Cannot create a viewmodel instance");
+            ViewModel viewModel;
 
             if (parameters != null)
-                viewModel.AddParameters(parameters);
+                viewModel = Activator.CreateInstance(type, new object[] { parameters }) as ViewModel;
+            else
+                viewModel = Activator.CreateInstance(type) as ViewModel;
 
-            view.BindingContext = viewModel;
+            view.BindingContext = viewModel ?? throw new InvalidOperationException($"Cannot create a viewmodel instance");
 
             return view;
         }

@@ -89,18 +89,23 @@ Na classe [Constants.cs](https://github.com/angelobelchior/IntelligentApp/blob/m
 ```csharp
     public class Constants
     {
+        public const string EmotionApiEndpoint = "";
         public const string EmotionApiKey = "";
-        public const string FaceApiKey = "";
-        public const string VisionApiKey = "";
-        public const string CustomVisionsApiKey = "";
 
+        public const string FaceApiEndpoint = "";
+        public const string FaceApiKey = "";
+
+        public const string VisionApiEndpoint = "";
+        public const string VisionApiKey = "";
+        
+        public const string CustomVisionsApiKey = "";
         public const string CustomVisionsApiEndpoint = "";
     }
 ```
 
-* **EmotionApiKey**: [Clique Aqui para Obter uma chave](https://azure.microsoft.com/pt-br/try/cognitive-services/?api=emotion-api)
-* **FaceApiKey**: [Clique Aqui para Obter uma chave](https://azure.microsoft.com/pt-br/try/cognitive-services/?api=face-api)
-* **VisionApiKey**: [Clique Aqui para Obter uma chave](https://azure.microsoft.com/pt-br/try/cognitive-services/?api=computer-vision)
+* **EmotionApiKey** e **EmotionApiEndpoint**: [Clique Aqui para obter uma chave e o Endpoint](https://azure.microsoft.com/pt-br/try/cognitive-services/?api=emotion-api)
+* **FaceApiKey** e **FaceApiEndpoint**: [Clique Aqui para obter uma chave e o Endpoint](https://azure.microsoft.com/pt-br/try/cognitive-services/?api=face-api)
+* **VisionApiKey** e **VisionApiEndpoint**: [Clique Aqui para obter uma chave e o Endpoint](https://azure.microsoft.com/pt-br/try/cognitive-services/?api=computer-vision)
 * **CustomVisionsApiKey** e **CustomVisionsApiEndpoint**: Esse serviço ainda está em _preview_. Para obter as chaves e o endpoint de testes é necessário criar uma conta em [https://www.customvision.ai/](https://www.customvision.ai/)
 
 **Você vai precisar ter uma conta no Microsoft Azure. Você pode criar gratuitamente.**
@@ -139,6 +144,20 @@ Caso você queira usar o App Center, será necessário criar uma conta e registr
 Após o registro, informe as chaves do iOS e do Android.
 
 ---
+
+## Biblioteca de Terceiros
+
+O **IntelligentApp** utiliza algumas bibliotecas de terceiros. São elas:
+
+[Xam.Plugin.Media](https://github.com/jamesmontemagno/MediaPlugin) - [MIT License](https://github.com/jamesmontemagno/MediaPlugin/blob/master/LICENSE)
+
+[Plugin.Permissions](https://github.com/jamesmontemagno/PermissionsPlugin) - [MIT License](https://github.com/jamesmontemagno/PermissionsPlugin/blob/master/LICENSE)
+
+[Plugin.CurrentActivity](https://github.com/jamesmontemagno/CurrentActivityPlugin) - [MIT License](https://github.com/jamesmontemagno/CurrentActivityPlugin/blob/master/LICENSE)
+
+[Version.Plugin](https://github.com/mtrinder/Xamarin.Plugins/tree/master/Version) - [MIT License](https://github.com/mtrinder/Xamarin.Plugins/blob/master/LICENSE)
+
+[Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json) - [MIT License](https://github.com/JamesNK/Newtonsoft.Json/blob/master/LICENSE.md)
 
 ## Contribua
 

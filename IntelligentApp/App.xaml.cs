@@ -2,7 +2,6 @@
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
-using System;
 
 namespace IntelligentApp
 {
@@ -11,10 +10,11 @@ namespace IntelligentApp
         public App()
         {
             InitializeComponent();
-            
+
             Locator.Register<ViewModels.Home, Views.Home>();
-            Locator.Register<ViewModels.Analyze, Views.Analyze>();
             Locator.Register<ViewModels.Photo, Views.Photo>();
+            Locator.Register<ViewModels.About, Views.About>();
+            Locator.Register<ViewModels.AboutService, Views.AboutService>();
             var home = Locator.GetView<ViewModels.Home>();
 
             var navigationPage = new NavigationPage(home);
