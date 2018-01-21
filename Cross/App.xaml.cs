@@ -28,8 +28,8 @@ namespace IntelligentApp
         protected override void OnStart()
         {
             AppCenter.LogLevel = LogLevel.Verbose;
-            AppCenter.Start("ios=9175f4cf-ec87-492a-bd8a-41b63f3d7a0f;" +
-                            "android=f7a2e08e-02fa-479a-beb3-687cd5b0f03c",
+            AppCenter.Start("ios=;" +
+                            "android=",
                             typeof(Analytics),
                             typeof(Crashes));
 
