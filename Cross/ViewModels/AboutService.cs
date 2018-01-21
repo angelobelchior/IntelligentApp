@@ -17,8 +17,7 @@ namespace IntelligentApp.ViewModels
             get => _info;
             set => this.SetValue(value, ref _info);
         }
-
-        [Preserve]
+        
         public AboutService(Parameters parameters)
         {
             this.Title = parameters["ServiceName"].ToString();

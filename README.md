@@ -1,4 +1,4 @@
-# IntelligentApp
+# IntelligentApp [![Build status](https://build.appcenter.ms/v0.1/apps/fcc1422e-7ac9-4fd1-b0cc-90f77149e098/branches/master/badge)](https://appcenter.ms)
 
 App Xamarin Forms demonstrando alguns serviços cognitivos da Microsoft.
 

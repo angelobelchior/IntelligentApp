@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelligentApp", "IntelligentApp\IntelligentApp.csproj", "{06E5B8BF-60DA-4C0C-BF87-9BE7B30517A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelligentApp", "Cross\IntelligentApp.csproj", "{06E5B8BF-60DA-4C0C-BF87-9BE7B30517A8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelligentApp.iOS", "iOS\IntelligentApp.iOS.csproj", "{8880A439-ECCA-4FFD-AB78-E2A3F475FEC1}"
 EndProject
@@ -51,6 +51,7 @@ Global
 		{1056DD17-AB9F-4DBC-9F2D-27A0CB96A6BE}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
 		{1056DD17-AB9F-4DBC-9F2D-27A0CB96A6BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1056DD17-AB9F-4DBC-9F2D-27A0CB96A6BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1056DD17-AB9F-4DBC-9F2D-27A0CB96A6BE}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{1056DD17-AB9F-4DBC-9F2D-27A0CB96A6BE}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{1056DD17-AB9F-4DBC-9F2D-27A0CB96A6BE}.Release|iPhone.Build.0 = Release|Any CPU
 		{1056DD17-AB9F-4DBC-9F2D-27A0CB96A6BE}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU

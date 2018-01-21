@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using IntelligentApp.ViewModels;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using static IntelligentApp.ViewModels.ViewModel;
 
 [assembly: Dependency(typeof(IntelligentApp.Views.Services.Navigation))]

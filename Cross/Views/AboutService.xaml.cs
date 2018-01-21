@@ -1,15 +1,15 @@
 ﻿using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+using Xamarin.Forms.Internals;
 
 namespace IntelligentApp.Views
 {
-	public partial class AboutService : ContentPage
+    public partial class AboutService : ContentPage
 	{
 		public AboutService ()
 		{
 			InitializeComponent ();
 
-            Extentions.IPhoneX(this);
+            Extentions.IPhone(this);
         }
 	}
 }

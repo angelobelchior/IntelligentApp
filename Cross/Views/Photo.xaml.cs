@@ -1,4 +1,5 @@
 ﻿using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace IntelligentApp.Views
 {
@@ -7,7 +8,7 @@ namespace IntelligentApp.Views
         public Photo()
         {
             InitializeComponent();
-            Extentions.IPhoneX(this);
+            Extentions.IPhone(this);
         }
 
         protected override void OnAppearing()

@@ -1,4 +1,5 @@
 ﻿using Foundation;
+using Microsoft.AppCenter.Distribute;
 using UIKit;
 
 namespace IntelligentApp.iOS
@@ -10,6 +11,9 @@ namespace IntelligentApp.iOS
         {
             Xamarin.Forms.Forms.Init();
             Xamarin.Forms.DependencyService.Register<DrawingRectangle>();
+
+            Distribute.DontCheckForUpdatesInDebug();
+
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

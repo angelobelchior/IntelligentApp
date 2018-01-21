@@ -1,4 +1,5 @@
 ﻿using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace IntelligentApp.Views
 {
@@ -8,7 +9,7 @@ namespace IntelligentApp.Views
         {
             InitializeComponent();
 
-            Extentions.IPhoneX(this);
+            Extentions.IPhone(this);
 
             this.webView.Navigated += Navigated;
         }

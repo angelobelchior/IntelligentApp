@@ -1,9 +1,10 @@
 ﻿using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 [assembly: Dependency(typeof(IntelligentApp.Views.Services.Message))]
 namespace IntelligentApp.Views.Services
-{   
+{
     public class Message : ViewModels.Services.IMessage
     {
         public async Task DisplayAlert(string title, string message, string cancel)

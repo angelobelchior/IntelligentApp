@@ -1,4 +1,6 @@
-﻿namespace IntelligentApp.ViewModels
+﻿using Xamarin.Forms.Internals;
+
+namespace IntelligentApp.ViewModels
 {
     public class About : ViewModel
     {

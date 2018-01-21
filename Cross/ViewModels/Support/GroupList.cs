@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+
 namespace System.Collections.Generic
 {
     public class GroupList<TKey, TItem> : ObservableCollection<TItem>
