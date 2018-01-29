@@ -11,7 +11,7 @@ namespace IntelligentApp.CognitiveServices
     {
         public async Task<VisionResult> Analyze(Stream stream)
         {
-            var client = new VisionServiceClient(Constants.VisionApiKey, Constants.CustomVisionsApiEndpoint);
+            var client = new VisionServiceClient(Constants.VisionApiKey, Constants.VisionApiEndpoint);
 
             var attributes = new List<VisionAttribute>();
             var rectangles = new List<Rectangle>();

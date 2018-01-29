@@ -1,18 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:converters="clr-namespace:IntelligentApp.Views.Converters"
              x:Class="IntelligentApp.Views.Photo"
              Title="{Binding Title}"
              IsBusy="{Binding IsBusy}"
              BackgroundColor="#FFFFFF"
              >
-
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:InverseBoolConverter x:Key="inverseBoolConverter"/>
-        </ResourceDictionary>
-    </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Command="{Binding TakePhotoCommand}" Text="Take Photo" Priority="0" Icon="take_photo.png"/>
@@ -33,17 +26,16 @@
                         <On Platform="iOS" Value="Default" />
                         <On Platform="Android" Value="Secondary" />
                     </OnPlatform.Platforms>
-                </OnPlatform>                
+                </OnPlatform>
             </ToolbarItem.Order>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout CompressedLayout.IsHeadless="True">
+            <StackLayout CompressedLayout.IsHeadless="True"
+                         >
                 <Label Text="Tire ou Selecione uma Foto"
-                       VerticalOptions="CenterAndExpand" 
-                       HorizontalOptions="CenterAndExpand" 
                        TextColor="#726e6e"
                        FontSize="Small"
                        FontAttributes="Bold"
@@ -51,17 +43,10 @@
                        IsVisible="{Binding IsVisible}"
                        />
 
-                <Image Source="{Binding Image}" 
-                       VerticalOptions="CenterAndExpand" 
-                       HorizontalOptions="CenterAndExpand" 
-                       Aspect="Fill"
-                       Margin="10"
-                       />
+                <Image Source="{Binding Image}" Aspect="AspectFit"/>
 
                 <Label Text="Sem resultados para mostrar" 
                        IsVisible="{Binding NoItems}"
-                       VerticalOptions="CenterAndExpand" 
-                       HorizontalOptions="CenterAndExpand" 
                        />
 
                 <ListView ItemsSource="{Binding Results}" 
@@ -69,6 +54,7 @@
                           IsGroupingEnabled="true" 
 		                  GroupDisplayBinding="{Binding Key}"
                           SeparatorVisibility="None"
+                          Margin="20"
                           >
                     <ListView.ItemTemplate>
                         <DataTemplate>

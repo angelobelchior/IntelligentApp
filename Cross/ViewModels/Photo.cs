@@ -10,6 +10,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using IntelligentApp.Services;
 using System.Collections.Generic;
+using Microsoft.AppCenter.Analytics;
 
 namespace IntelligentApp.ViewModels
 {
@@ -61,15 +62,21 @@ namespace IntelligentApp.ViewModels
         }
 
         private async Task TakePhoto()
-            => await Execute(() => CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+        {
+            var result = await Execute(() => CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
             {
                 Directory = this.Title.Replace(" ", string.Empty),
                 Name = Guid.NewGuid().ToString(),
                 CompressionQuality = 80
             }));
+            this.TrackEvent(nameof(TakePhoto), result);
+        }
 
         private async Task PickPhoto()
-            => await Execute(() => CrossMedia.Current.PickPhotoAsync());
+        {
+            var result = await Execute(() => CrossMedia.Current.PickPhotoAsync());
+            this.TrackEvent(nameof(PickPhoto), result);
+        }
 
         private async Task AboutService()
         {
@@ -80,13 +87,15 @@ namespace IntelligentApp.ViewModels
             await this.Navigation.ToModal<AboutService>(parameters);
         }
 
-        private async Task Execute(Func<Task<MediaFile>> func)
+        private async Task<VisionResult> Execute(Func<Task<MediaFile>> func)
         {
+            VisionResult result = null;
+
             try
             {
                 var mediaFile = await func();
                 if (mediaFile == null)
-                    return;
+                    return null;
 
                 this.IsBusy = true;
 
@@ -95,23 +104,24 @@ namespace IntelligentApp.ViewModels
 
                 this.IsVisible = false;
 
-                var result = await this._service.Analyze(mediaFile.GetStream());
+                result = await this._service.Analyze(mediaFile.GetStream());
                 if (result != null)
                     this.Group(result);
 
                 this.NoItems = this.Results.Count == 0;
-
-
                 this.DrawRectangles(result, mediaFile);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+                this.TrackError(ex);
                 await this.Message.DisplayAlert(this.Title, "Não foi possível obter a foto", "Ok");
             }
             finally
             {
                 this.IsBusy = false;
             }
+
+            return result;
         }
 
         private void Group(VisionResult result)
@@ -120,7 +130,6 @@ namespace IntelligentApp.ViewModels
                         orderby attribute.ElementeName
                         group attribute by attribute.ElementeName into groups
                         select new GroupList<string, VisionAttribute>(groups.Key, groups);
-
             items.ForEach(this.Results.Add);
         }
 
@@ -131,8 +140,33 @@ namespace IntelligentApp.ViewModels
 
             var service = DependencyService.Get<IDrawingRectangle>(DependencyFetchTarget.GlobalInstance);
             service.Draw(mediaFile.Path, result.Rectangles);
-
             this.Image = mediaFile.Path;
         }
+
+        private void TrackEvent(string source, VisionResult result)
+        {
+            try
+            {
+                var properties = new Dictionary<string, string>();
+                properties.Add("Service", this.Title);
+                properties.Add("Source", source);
+
+                if (result != null)
+                    foreach (var prop in result.ToProperties())
+                        properties.Add(prop.Key, prop.Value);
+
+                Analytics.TrackEvent(this.Title, properties);
+            }
+            catch (Exception ex)
+            {
+                this.TrackError(ex);
+            }
+        }
+
+        private void TrackError(Exception ex)
+            => Analytics.TrackEvent("Error", new Dictionary<string, string>
+            {
+                ["Exception"] = ex.Message
+            });
     }
 }

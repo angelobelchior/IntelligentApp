@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
 using IntelligentApp.Models;
+using System.Collections.Generic;
 
 namespace IntelligentApp.CognitiveServices
 {
@@ -28,8 +30,8 @@ namespace IntelligentApp.CognitiveServices
                 if (customVisionResponse == null)
                     return null;
 
-                //return customVisionResponse.Convert();
-                return null;
+                var attributes = customVisionResponse.Convert();
+                return new VisionResult { Attributes = attributes };
             }
         }
 
@@ -41,10 +43,10 @@ namespace IntelligentApp.CognitiveServices
             public DateTime Created { get; set; }
             public Prediction[] Predictions { get; set; }
 
-            //public List<VisionResult> Convert() => this.Predictions
-            //                                     ?.OrderByDescending(p => p.Probability)
-            //                                     ?.Select(p => p.Convert())
-            //                                     ?.ToList();
+            public List<VisionAttribute> Convert() => this.Predictions
+                                                         ?.OrderByDescending(p => p.Probability)
+                                                         ?.Select(p => p.Convert())
+                                                         ?.ToList();
         }
 
         public class Prediction
@@ -53,8 +55,8 @@ namespace IntelligentApp.CognitiveServices
             public string Tag { get; set; }
             public float Probability { get; set; }
 
-            //public VisionResult Convert()
-            //    => new VisionResult(this.Tag, this.Probability);
+            public VisionAttribute Convert()
+                => new VisionAttribute(this.Tag, this.Probability.ToString("####0.00"));
         }
     }
 }

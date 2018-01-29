@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
-using Xamarin.Forms.Internals;
 
 namespace IntelligentApp.ViewModels
 {
@@ -47,14 +46,10 @@ namespace IntelligentApp.ViewModels
         public class Parameters : Dictionary<string, object>
         {
             private Parameters()
-                : base(StringComparer.CurrentCultureIgnoreCase)
-            {
-            }
+                : base(StringComparer.CurrentCultureIgnoreCase) { }
 
             public Parameters(string key, object value)
-            {
-                this.Add(key, value);
-            }
+                => this.Add(key, value);
 
             public Parameters(params object[] args)
             {
@@ -64,8 +59,8 @@ namespace IntelligentApp.ViewModels
                 {
                     if (i % 2 == 0)
                     {
-                        if(args[i] is string key)
-                        this.Add(args[i].ToString(), args[i + 1]);
+                        if (args[i] is string key)
+                            this.Add(args[i].ToString(), args[i + 1]);
                         i++;
                     }
                 }

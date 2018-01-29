@@ -1,7 +1,8 @@
 ﻿using System.Threading.Tasks;
 using IntelligentApp.ViewModels;
+using Microsoft.AppCenter.Analytics;
 using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using System.Linq;
 using static IntelligentApp.ViewModels.ViewModel;
 
 [assembly: Dependency(typeof(IntelligentApp.Views.Services.Navigation))]
@@ -13,6 +14,7 @@ namespace IntelligentApp.Views.Services
             where TViewModel : ViewModel
         {
             var page = Locator.GetView<TViewModel>(parameters);
+            this.TrackEvent(page.Title, parameters);
             await App.Current.MainPage.Navigation.PushAsync(page);
         }
 
@@ -20,8 +22,10 @@ namespace IntelligentApp.Views.Services
         {
             var page = Locator.GetView<TViewModel>(parameters);
 
+            this.TrackEvent(page.Title, parameters);
+
             if (navigateOnIOS)
-                navigateOnIOS = (Device.RuntimePlatform == Device.iOS);
+                navigateOnIOS = (Device.RuntimePlatform == Device.iOS) || (Device.RuntimePlatform == Device.UWP);
 
             if (navigateOnIOS)
                 await App.Current.MainPage.Navigation.PushAsync(page);
@@ -35,6 +39,13 @@ namespace IntelligentApp.Views.Services
                 await App.Current.MainPage.Navigation.PopModalAsync();
             else
                 await App.Current.MainPage.Navigation.PopAsync();
+        }
+
+        private void TrackEvent(string page, Parameters parameters)
+        {
+            var properties = parameters?.ToDictionary(k => k.Key, v => v.Value?.ToString());
+            properties.Add("Page", page);
+            Analytics.TrackEvent(nameof(Navigation), properties);
         }
     }
 }

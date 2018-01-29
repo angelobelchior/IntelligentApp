@@ -18,8 +18,8 @@ namespace IntelligentApp.Droid
             var canvas = new Canvas(mutableBitmap);
             var paint = new Paint
             {
-                Color = Color.Black,
-                StrokeWidth = 2,
+                Color = Color.OrangeRed,
+                StrokeWidth = 6,
             };
             paint.SetStyle(Paint.Style.Stroke);
 

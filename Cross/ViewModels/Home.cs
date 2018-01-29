@@ -1,4 +1,5 @@
-﻿using Plugin.Media;
+﻿using Microsoft.AppCenter.Analytics;
+using Plugin.Media;
 using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -26,7 +27,14 @@ namespace IntelligentApp.ViewModels
         {
             await CrossMedia.Current.Initialize();
             if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                Analytics.TrackEvent("Media", new Dictionary<string, string>
+                {
+                    ["IsCameraAvailable"] = CrossMedia.Current.IsCameraAvailable.ToString(),
+                    ["IsTakePhotoSupported"] = CrossMedia.Current.IsTakePhotoSupported.ToString(),
+                });
                 await this.Message.DisplayAlert(this.Title, ":( No camera available.", "Ok");
+            }
         }
 
         private async void CognitiveServiceSelected(object parameter)

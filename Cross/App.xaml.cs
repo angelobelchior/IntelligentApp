@@ -2,7 +2,6 @@
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
-using Microsoft.AppCenter.Distribute;
 
 namespace IntelligentApp
 {
@@ -28,20 +27,17 @@ namespace IntelligentApp
         protected override void OnStart()
         {
             AppCenter.LogLevel = LogLevel.Verbose;
-            AppCenter.Start("ios=;" +
-                            "android=",
-                            typeof(Analytics),
+            AppCenter.Start("android=;" + 
+                            "uwp=;" + 
+                            "ios=", 
+                            typeof(Analytics), 
                             typeof(Crashes));
 
-            
+            Crashes.NotifyUserConfirmation(UserConfirmation.AlwaysSend);
         }
 
-        protected override void OnSleep()
-        {
-        }
+        protected override void OnSleep() { }
 
-        protected override void OnResume()
-        {
-        }
+        protected override void OnResume() { }
     }
 }
