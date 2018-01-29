@@ -1,4 +1,9 @@
-# IntelligentApp [![Build status](https://build.appcenter.ms/v0.1/apps/fcc1422e-7ac9-4fd1-b0cc-90f77149e098/branches/master/badge)](https://appcenter.ms)
+# IntelligentApp
+
+| Android                                                                                                                                  | iOS                                                                                                                                      | UWP                                                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| [![Build status](https://build.appcenter.ms/v0.1/apps/fcc1422e-7ac9-4fd1-b0cc-90f77149e098/branches/master/badge)](https://appcenter.ms) | [![Build status](https://build.appcenter.ms/v0.1/apps/7905fabb-f243-446d-89f4-9fce5c3988e0/branches/master/badge)](https://appcenter.ms) | [![Build status](https://build.appcenter.ms/v0.1/apps/fcc1422e-7ac9-4fd1-b0cc-90f77149e098/branches/master/badge)](https://appcenter.ms) |
+
 
 App Xamarin Forms demonstrando alguns serviços cognitivos da Microsoft.
 
