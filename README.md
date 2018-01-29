@@ -139,6 +139,7 @@ Na classe [App.xaml.cs](https://github.com/angelobelchior/IntelligentApp/blob/ma
         protected override void OnStart()
         {
             AppCenter.Start("ios=;" +
+                            "uwp=;" +
                             "android=",
                             typeof(Analytics), typeof(Crashes));
         }
@@ -146,7 +147,7 @@ Na classe [App.xaml.cs](https://github.com/angelobelchior/IntelligentApp/blob/ma
 
 Caso você queira usar o App Center, será necessário criar uma conta e registrar os App. 
 
-Após o registro, informe as chaves do iOS e do Android.
+Após o registro, informe as chaves do Android, iOS e do UWP.
 
 ---
 

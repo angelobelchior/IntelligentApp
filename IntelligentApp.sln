@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelligentApp.iOS", "iOS\I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelligentApp.Droid", "Droid\IntelligentApp.Droid.csproj", "{1056DD17-AB9F-4DBC-9F2D-27A0CB96A6BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelligentApp.UWP", "IntelligentApp.UWP\IntelligentApp.UWP.csproj", "{6F925B9C-F178-4A8B-AC4E-6DBB08B6DA22}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UWP", "IntelligentApp.UWP\IntelligentApp.UWP.csproj", "{6F925B9C-F178-4A8B-AC4E-6DBB08B6DA22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
